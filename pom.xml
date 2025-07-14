@@ -49,7 +49,7 @@
 					<applicationName>${appname}</applicationName>
 					<businessGroup>infosys</businessGroup>
 		            <workerType>MICRO</workerType>
-		            <workerAmount>1</workerAmount>
+		            <worker>1</worker>
 		            <region>us-east-1</region>
 					<objectStoreV2>true</objectStoreV2>
 					</cloudHubDeployment>

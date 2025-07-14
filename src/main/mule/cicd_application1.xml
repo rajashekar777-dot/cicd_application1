@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:db="http://www.mulesoft.org/schema/mule/db"
+	xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/db http://www.mulesoft.org/schema/mule/db/current/mule-db.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="86d9eae0-3dec-40aa-af0a-0931895934eb" >
+		<http:listener-connection host="localhost" port="8082" />
+	</http:listener-config>
+	<db:config name="Database_Config" doc:name="Database Config" doc:id="1f58bfc8-81b4-4540-8328-a85100c14917" >
+		<db:my-sql-connection host="bitqwjb8z1wop9ruxuet-mysql.services.clever-cloud.com" port="3306" user="ujvygwjtr7dtzch7" password="FB4yAyx3iNvd2GvBwmoQ" database="bitqwjb8z1wop9ruxuet" />
+	</db:config>
+	<flow name="cicd_application1Flow" doc:id="68c62deb-e9f3-49a1-bb7a-a3b210857cd3" >
+		<http:listener doc:name="Listener" doc:id="06000d31-a9b6-4d6e-88b3-a5d80b970054" config-ref="HTTP_Listener_config" path="/apiCICD"/>
+		<logger level="INFO" doc:name="start Logger" doc:id="40d643a5-b285-4145-a2ae-bf12b329298b" message="send request to retrieve customerdata from db"/>
+		<db:select doc:name="Select" doc:id="4c7823ee-0fd2-4bb1-8960-ebceec2a7dcf" config-ref="Database_Config">
+			<db:sql ><![CDATA[select * from Customer;]]></db:sql>
+		</db:select>
+		<ee:transform doc:name="Transform Message" doc:id="c8e1f096-d279-4ca8-8205-139fd0f97c1d" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+payload]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+		<logger level="INFO" doc:name="end Logger" doc:id="de5ab2c8-8dc9-4a2a-ac5c-c0f76bfda4fb" message="response recieved from the DB of customer "/>
+	</flow>
+</mule>

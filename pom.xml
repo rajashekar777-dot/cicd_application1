@@ -45,14 +45,14 @@
 					<muleVersion>${mule.version}</muleVersion>
 					<username>${anypoint.username}</username>
 					<password>${anypoint.password}</password>
-					<environment>dev</environment>
-					<applicationName>cicd_application1</applicationName>
-					<businessGroup>infosys-715</businessGroup>
-		            <workerType>MICRO</workerType>
-		            <region>us-east-1</region>
+					<environment>${env}</environment>
+					<applicationName>${appname}</applicationName>
+					<businessGroup>${business}</businessGroup>
+					<workerType>${vCore}</workerType>
+					<workers>${workers}</workers>
 					<objectStoreV2>true</objectStoreV2>
-					</cloudHubDeployment>
-				</configuration>
+					</cloudHubDeployment>				
+					</configuration>
 			</plugin>
 			<plugin>
 				<groupId>org.mule.tools.maven</groupId>

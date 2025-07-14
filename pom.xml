@@ -46,10 +46,9 @@
 					<username>${anypoint.username}</username>
 					<password>${anypoint.password}</password>
 					<environment>dev</environment>
-					<applicationName>${appname}</applicationName>
-					<businessGroup>infosys</businessGroup>
+					<applicationName>cicd_application1</applicationName>
+					<businessGroup>infosys-715</businessGroup>
 		            <workerType>MICRO</workerType>
-		            <worker>1</worker>
 		            <region>us-east-1</region>
 					<objectStoreV2>true</objectStoreV2>
 					</cloudHubDeployment>
